@@ -20,7 +20,7 @@ import java.time.LocalDate;
 @RequiredArgsConstructor
 public class DailyRecordService {
 
-    private final DailyRecordRepository repository;
+    private final DailyRecordRepository dailyRecordRepository;
 
     @Transactional
     public DailyRecordResponse register(DailyRecordRegisterRequest request){
@@ -33,7 +33,7 @@ public class DailyRecordService {
 
         log.info("Record 생성");
 
-        DailyRecord savedRecord = repository.save(record);
+        DailyRecord savedRecord = dailyRecordRepository.save(record);
 
         log.info("DailyRecord 등록 userId : {}, recordId : {}",savedRecord.getUserId(),savedRecord.getId());
 
@@ -43,7 +43,7 @@ public class DailyRecordService {
 
     @Transactional(readOnly = true)
     public DailyRecordResponse get(Long id){
-        DailyRecord dailyRecord = repository.findById(id)
+        DailyRecord dailyRecord = dailyRecordRepository.findById(id)
                 .orElseThrow(DailyRecordException::new);
 
         log.info("DailyRecord 조회 userId : {}, recordId : {}",dailyRecord.getUserId(),dailyRecord.getId());
@@ -53,12 +53,12 @@ public class DailyRecordService {
 
     @Transactional(readOnly = true)
     public Page<DailyRecordResponse> detAll(Pageable pageable){
-        return repository.findAll(pageable).map(DailyRecordResponse::from);
+        return dailyRecordRepository.findAll(pageable).map(DailyRecordResponse::from);
     }
 
     @Transactional
     public DailyRecordResponse update(Long id, DailyRecordUpdateRequest request){
-        DailyRecord dailyRecord = repository.findById(id).orElseThrow(DailyRecordException::new);
+        DailyRecord dailyRecord = dailyRecordRepository.findById(id).orElseThrow(DailyRecordException::new);
 
         dailyRecord.update(
                 request.getMood(),
@@ -72,9 +72,9 @@ public class DailyRecordService {
 
     @Transactional
     public void delete(Long id){
-        if(repository.existsById(id)){
+        if(dailyRecordRepository.existsById(id)){
             DailyRecordResponse dailyRecord = get(id);
-            repository.deleteById(id);
+            dailyRecordRepository.deleteById(id);
             log.info("DailyRecord 삭제 userId : {}, deletedRecordId : {}",dailyRecord.getUserId(),dailyRecord.getId());
         }
     }

@@ -8,7 +8,6 @@ import suwon.jeongja.welfare.common.BaseEntity;
 
 @Entity
 @Getter
-@Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User extends BaseEntity {
     @Id
@@ -25,8 +24,8 @@ public class User extends BaseEntity {
         this.age = age;
     }
 
-    public void update(String title, String gender, Long age) {
-        this.name = title;
+    public void update(String name, String gender, Long age) {
+        this.name = name;
         this.gender = gender;
         this.age = age;
     }

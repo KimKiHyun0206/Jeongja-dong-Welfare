@@ -14,7 +14,7 @@ import suwon.jeongja.welfare.service.DailyRecordService;
 @RestController
 @RequestMapping(value = "/api/daily-record", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
-public class DailyRecordController {
+public class DailyRecordApiController {
 
     private final DailyRecordService dailyRecordService;
 

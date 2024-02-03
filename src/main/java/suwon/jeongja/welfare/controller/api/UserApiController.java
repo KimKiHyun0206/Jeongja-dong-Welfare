@@ -1,4 +1,4 @@
-package suwon.jeongja.welfare.controller;
+package suwon.jeongja.welfare.controller.api;
 
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;

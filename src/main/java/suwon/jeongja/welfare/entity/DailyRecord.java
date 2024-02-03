@@ -4,14 +4,14 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import suwon.jeongja.welfare.common.BaseEntity;
 
 import java.time.LocalDate;
 
 @Entity
 @Getter
-@Table(name = "user")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class DailyRecord {
+public class DailyRecord extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

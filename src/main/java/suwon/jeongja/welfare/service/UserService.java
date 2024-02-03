@@ -6,10 +6,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import suwon.jeongja.welfare.domain.User;
 import suwon.jeongja.welfare.dto.request.UserRegisterRequest;
 import suwon.jeongja.welfare.dto.request.UserUpdateRequest;
 import suwon.jeongja.welfare.dto.response.UserResponse;
+import suwon.jeongja.welfare.entity.User;
 import suwon.jeongja.welfare.excpetion.UserException;
 import suwon.jeongja.welfare.repository.UserRepository;
 
@@ -24,6 +24,7 @@ public class UserService {
     public UserResponse register(UserRegisterRequest request){
         User user = new User(
                 request.getName(),
+                request.getGender(),
                 request.getAge()
         );
 
@@ -49,7 +50,7 @@ public class UserService {
     public UserResponse update(Long id, UserUpdateRequest request){
         User user = userRepository.findById(id).orElseThrow(UserException::new);
 
-        user.updateAll(request.getName(), request.getAge());
+        user.update(request.getName(), request.getGender(), request.getAge());
 
         log.info("[ Info ] User 에 대한 모든 데이터를 Update 했습니다 {}", user.getId());
 
